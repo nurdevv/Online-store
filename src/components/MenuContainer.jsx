@@ -4,11 +4,12 @@ import { categories } from "../utils/data";
 import { motion } from "framer-motion";
 import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
+import {CartContainer} from "./index";
 
 const MenuContainer = () => {
     const [filter, setFilter] = useState("chicken");
 
-    const [{ foodItems }] = useStateValue();
+    const [{ foodItems, cartShow }] = useStateValue();
 
     return (
         <section className="w-full my-6" id="menu">
@@ -63,6 +64,7 @@ const MenuContainer = () => {
                     />
                 </div>
             </div>
+            {cartShow && <CartContainer/>}
         </section>
     );
 };
