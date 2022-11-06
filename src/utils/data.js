@@ -7,28 +7,28 @@ import Fi1 from '../img/fi1.png'
 export const heroData = [
     {
         id: 1,
-        name: 'Ice-cream',
+        name: 'Мороженое',
         decp: 'Chocolate & vanilla',
         price: '5.25',
         imageSrc: I1
     },
     {
         id: 2,
-        name: 'Strawberries',
+        name: 'Клубника',
         decp: 'Fresh Strawberries',
         price: '10.25',
         imageSrc: F1
     },
     {
         id: 3,
-        name: 'Chicken Kebab',
+        name: 'Куриный кебаб',
         decp: 'Maxed Kebab Plate',
         price: '8.25',
         imageSrc: C3
     },
     {
         id: 4,
-        name: 'Fish Kebab',
+        name: 'Рыбный кебаб',
         decp: 'Mixed Fish Kebab',
         price: '8.25',
         imageSrc: Fi1
@@ -38,37 +38,37 @@ export const heroData = [
 export const categories = [
     {
         id: 1,
-        name: 'Chicken',
+        name: 'Курица',
         urlParamName: 'chicken'
     },
     {
         id: 2,
-        name: 'Curry',
+        name: 'Карри',
         urlParamName: 'curry'
     },
     {
         id: 3,
-        name: 'Rice',
+        name: 'Рис',
         urlParamName: 'rice'
     },
     {
         id: 4,
-        name: 'Fish',
+        name: 'Рыба',
         urlParamName: 'fish'
     },
     {
         id: 5,
-        name: 'Fruits',
+        name: 'Фрукты',
         urlParamName: 'fruits'
     },
     {
         id: 6,
-        name: 'Ice-creams',
+        name: 'Мороженое',
         urlParamName: 'ice-creams'
     },
     {
         id: 7,
-        name: 'Soft Drinks',
+        name: 'Напитки',
         urlParamName: 'drinks'
     }
 ]

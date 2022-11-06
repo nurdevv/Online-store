@@ -6,13 +6,18 @@ import {useStateValue} from "../context/StateProvider";
 import {actionType} from "../context/reducer";
 import EmptyCart from '../img/emptyCart.svg'
 import {CartItem} from "./index";
+import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import {app} from "../firebase.config";
 
 const CartContainer = () => {
-
-
     const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
+
     const [flag, setFlag] = useState(1);
     const [tot, setTot] = useState(0);
+
+    const firebaseAuth = getAuth(app)
+    const provider = new GoogleAuthProvider()
+
 
     const showCart = () => {
         dispatch({
@@ -26,17 +31,28 @@ const CartContainer = () => {
             return accumulator + item.qty * item.price;
         }, 0);
         setTot(totalPrice);
-        console.log(tot);
     }, [tot, flag]);
 
     const clearCart = () => {
         dispatch({
             type: actionType.SET_CART_ITEMS,
             cartItems: [],
-        });
-
+        })
         localStorage.setItem("cartItems", JSON.stringify([]));
-    };
+    }
+
+    const login = async () => {
+        if (!user) {
+            const {
+                user: {refreshToken, providerData},
+            } = await signInWithPopup(firebaseAuth, provider);
+            dispatch({
+                type: actionType.SET_USER,
+                user: providerData[0],
+            });
+            localStorage.setItem("user", JSON.stringify(providerData[0]));
+        }
+    }
 
     return (
         <motion.div
@@ -85,18 +101,18 @@ const CartContainer = () => {
                         className='w-full flex-1 bg-cartTotal rounded-t[2em] flex flex-col items-center justify-evenly px-8 py-2'>
                         <div className='w-full flex items-center justify-between'>
                             <p className='text-gray-400 text-lg'>Сумма</p>
-                            <p className='text-gray-400 text-lg'>$ {tot}</p>
+                            <p className='text-gray-400 text-lg'>{tot} сомов</p>
                         </div>
                         <div className='w-full flex items-center justify-between'>
                             <p className='text-gray-400 text-lg'>Доставка</p>
-                            <p className='text-gray-400 text-lg'>$ 2.5</p>
+                            <p className='text-gray-400 text-lg'>150 сомов</p>
                         </div>
 
                         <div className='w-full border-b border-gray-600 my-2'></div>
 
                         <div className='w-full flex items-center justify-between'>
                             <p className='text-gray-200 text-lg font-semibold'>Итог</p>
-                            <p className='text-gray-200 text-lg font-semibold'>$ {tot + 2.5}</p>
+                            <p className='text-gray-200 text-lg font-semibold'>{tot + 150} сомов</p>
                         </div>
 
                         {user ? (
@@ -108,6 +124,7 @@ const CartContainer = () => {
                         ) : (
                             <motion.button whileTap={{scale: 0.8}}
                                            className='w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-lg my-2 hover:shadow-lg'
+                                           onClick={login}
                             >
                                 Войдите, чтобы проверить
                             </motion.button>

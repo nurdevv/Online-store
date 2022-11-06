@@ -57,7 +57,7 @@ const RowContainer = ({flag, data, scrollValue}) => {
                         <p className='mt-1 text-sm text-gray-500 '>{item?.calories} калории</p>
                         <div className='flex items-center gap-8'>
                             <p className='text-lg text-textColor font-semibold'>
-                                <span className='text-sm text-red-500'>$</span> {item?.price}
+                                 {item?.price} <span className='text-sm text-red-500'>сомов</span>
                             </p>
                         </div>
                     </div>
@@ -67,7 +67,7 @@ const RowContainer = ({flag, data, scrollValue}) => {
             <div className="w-full flex flex-col items-center justify-center">
                 <img src={NotFound} className="h-340" alt={`NotFound`}/>
                 <p className="text-xl text-headingColor font-semibold my-2">
-                    Items Not Available
+                    Админ не загрузил меню
                 </p>
             </div>
         )
